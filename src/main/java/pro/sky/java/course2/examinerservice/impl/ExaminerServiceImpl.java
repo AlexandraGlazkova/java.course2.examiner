@@ -3,7 +3,7 @@ package pro.sky.java.course2.examinerservice.impl;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import pro.sky.java.course2.examinerservice.domain.Question;
-import pro.sky.java.course2.examinerservice.excepshion.QuestionAlreadyAddedException;
+import pro.sky.java.course2.examinerservice.exception.QuestionAlreadyAddedException;
 import pro.sky.java.course2.examinerservice.service.ExaminerService;
 import pro.sky.java.course2.examinerservice.service.QuestionService;
 import java.util.Collection;
@@ -31,21 +31,21 @@ public class ExaminerServiceImpl implements ExaminerService {
             throw new QuestionAlreadyAddedException("Недостаточно вопросов");
         }
         randomQuestions.clear();
-//        while (randomQuestions.size() < amount) {
-//            int questionCategory = random.nextInt(2);
-//            switch (questionCategory) {
-//                case 0:
-//                    Question question1 = javaQuestionService.getRandomQuestion();
-//                    randomQuestions.add(question1);
-//                    break;
-//                case 1:
-//                    Question question2 = mathQuestionService.getRandomQuestion();
-//                    randomQuestions.add(question2);
-//                    break;
-//                default:
-//                    throw new RuntimeException("Недопустимое значение: " + questionCategory);
-//            }
-//        }
+        while (randomQuestions.size() < amount) {
+            int questionCategory = random.nextInt(2);
+            switch (questionCategory) {
+                case 0:
+                    Question question1 = (Question) javaQuestionService.getRandomQuestion();
+                    randomQuestions.add(question1);
+                    break;
+                case 1:
+                    Question question2 = (Question) mathQuestionService.getRandomQuestion();
+                    randomQuestions.add(question2);
+                    break;
+                default:
+                    throw new RuntimeException("Недопустимое значение: " + questionCategory);
+            }
+        }
         return randomQuestions;
     }
 }

@@ -9,6 +9,6 @@ public interface QuestionService {
     Boolean addQuestion (Question question);
     Boolean removeQuestion (Question question);
     Collection<Question> getAllQuestions();
-    Collection<Question> getRandomQuestion();
+    Question getRandomQuestion();
 
 }
