@@ -3,7 +3,8 @@ package pro.sky.java.course2.examinerservice.impl;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import pro.sky.java.course2.examinerservice.domain.Question;
-import pro.sky.java.course2.examinerservice.service.QuestionRepository;
+
+import pro.sky.java.course2.examinerservice.repository.QuestionRepository;
 import pro.sky.java.course2.examinerservice.service.QuestionService;
 
 import java.util.Collection;

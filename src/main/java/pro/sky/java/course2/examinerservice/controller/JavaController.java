@@ -15,28 +15,28 @@ public class JavaController {
     private final QuestionService service;
 
     public JavaController(@Qualifier ("javaQuestionService") QuestionService service){
+
         this.service = service;
     }
 
     @GetMapping("/java/addJava")
     public Boolean addQuestion(
-            @RequestParam(value = "question") String question,
-            @RequestParam(value = "answer") String answer) {
+            @RequestParam("question") String question,
+            @RequestParam("answer") String answer) {
         return service.addQuestion(question, answer);
     }
 
     @GetMapping("/java/removeJava")
     public Boolean removeQuestion(
-            @RequestParam (value = "question") String question,
-            @RequestParam (value = "question") String answer) {
+            @RequestParam ("question") String question,
+            @RequestParam ("question") String answer) {
 
         return service.removeQuestion(new Question(question, answer));
     }
 
     @GetMapping("/javaJava")
     public Collection<Question> getAll(){
-        Collection<Question> questions = null;
-        questions = service.getAllQuestions();
+        Collection<Question> questions = null; questions = service.getAllQuestions();
         return questions;
 
     }

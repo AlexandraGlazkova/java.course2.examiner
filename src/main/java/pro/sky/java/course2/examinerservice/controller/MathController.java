@@ -21,15 +21,15 @@ public class MathController {
 
     @GetMapping(path = "/java/addMath")
     public Boolean addQuestion(
-            @RequestParam(value = "question") String question,
-            @RequestParam(value = "answer") String answer) {
+            @RequestParam("question") String question,
+            @RequestParam("answer") String answer) {
         return service.addQuestion(question, answer);
     }
 
     @GetMapping(path = "/java/removeMath")
     public Boolean removeQuestion(
-            @RequestParam(value = "question") String question,
-            @RequestParam(value = "answer") String answer) {
+            @RequestParam("question") String question,
+            @RequestParam("answer") String answer) {
         return service.removeQuestion(new Question(question, answer));
     }
 

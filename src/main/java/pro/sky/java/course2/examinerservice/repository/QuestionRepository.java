@@ -1,4 +1,4 @@
-package pro.sky.java.course2.examinerservice.service;
+package pro.sky.java.course2.examinerservice.repository;
 
 import pro.sky.java.course2.examinerservice.domain.Question;
 

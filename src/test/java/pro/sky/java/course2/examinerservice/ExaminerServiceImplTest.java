@@ -5,16 +5,19 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
+
 import org.mockito.junit.jupiter.MockitoExtension;
 import pro.sky.java.course2.examinerservice.domain.Question;
+import pro.sky.java.course2.examinerservice.exception.QuestionAlreadyAddedException;
 import pro.sky.java.course2.examinerservice.impl.ExaminerServiceImpl;
 import pro.sky.java.course2.examinerservice.impl.JavaQuestionService;
 import pro.sky.java.course2.examinerservice.impl.MathQuestionService;
 
 import java.util.List;
 
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
+
+import static org.mockito.Mockito.when;
 import static pro.sky.java.course2.examinerservice.controller.Constants.*;
 
 
@@ -50,35 +53,12 @@ public class ExaminerServiceImplTest {
         examinerService = new ExaminerServiceImpl(javaQuestionServiceMock, mathQuestionServiceMock);
     }
 
-    @Test
-    void getQuestionsPositiveTest() {
-        Mockito.when(javaQuestionServiceMock.getRandomQuestion()).thenReturn(new Question(JAVA_QUESTION_1, JAVA_ANSWER_1));
-
-        assertThat(examinerService.getQuestions(1))
-                .hasSize(1);
-
-        Mockito.when(mathQuestionServiceMock.getRandomQuestion()).thenReturn(
-                new Question(MATH_QUESTION_2, MATH_ANSWER_2),
-                new Question(MATH_QUESTION_1, MATH_ANSWER_1),
-                new Question(MATH_QUESTION_5, MATH_ANSWER_5));
-
-        assertThat(examinerService.getQuestions(3))
-                .hasSize(3);
-
-        Mockito.when(javaQuestionServiceMock.getRandomQuestion()).thenReturn(
-                new Question(JAVA_QUESTION_1, JAVA_ANSWER_1),
-                new Question(JAVA_QUESTION_3, JAVA_ANSWER_3),
-                new Question(JAVA_QUESTION_5, JAVA_ANSWER_5));
-        assertThat(examinerService.getQuestions(3))
-                .hasSize(3);
-    }
 
     @Test
     void getQuestionsNegativeTest() {
-        assertThatExceptionOfType(NotEnoughQuestionsException.class)
+        assertThatExceptionOfType(QuestionAlreadyAddedException.class)
+                .isThrownBy(() -> examinerService.getQuestions(
+                        javaQuestionServiceMock.getAllQuestions().size() +
+                                mathQuestionServiceMock.getAllQuestions().size() + 1));
     }
-     .isThrownBy(() -> examinerService.getQuestions(
-            javaQuestionServiceMock.getAllQuestions().size() +
-            mathQuestionServiceMock.getAllQuestions().size() + 1));
 }
-
