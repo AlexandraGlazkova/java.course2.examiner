@@ -33,11 +33,7 @@ public class JavaQuestionRepository implements QuestionRepository {
 
     @Override
     public Boolean addQuestion(Question question) {
-        if (questions.add(question)) {
-            return true;
-        } else {
-            return false;
-        }
+        return questions.add(question);
     }
 
     @Override
