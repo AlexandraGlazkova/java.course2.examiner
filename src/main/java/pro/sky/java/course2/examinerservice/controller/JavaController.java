@@ -14,22 +14,22 @@ import java.util.Collection;
 public class JavaController {
     private final QuestionService service;
 
-    public JavaController(@Qualifier ("javaQuestionService") QuestionService service){
+    public JavaController(@Qualifier (value ="javaQuestionService") QuestionService service){
 
         this.service = service;
     }
 
     @GetMapping("/java/addJava")
     public Boolean addQuestion(
-            @RequestParam("question") String question,
-            @RequestParam("answer") String answer) {
+            @RequestParam String question,
+            @RequestParam String answer) {
         return service.addQuestion(question, answer);
     }
 
     @GetMapping("/java/removeJava")
     public Boolean removeQuestion(
-            @RequestParam ("question") String question,
-            @RequestParam ("question") String answer) {
+            @RequestParam  String question,
+            @RequestParam  String answer) {
 
         return service.removeQuestion(new Question(question, answer));
     }
