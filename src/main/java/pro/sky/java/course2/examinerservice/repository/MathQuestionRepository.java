@@ -31,20 +31,12 @@ public class MathQuestionRepository implements QuestionRepository {
 
     @Override
     public Boolean addQuestion(Question question) {
-        if (questions.add(question)) {
-            return true;
-        } else {
-            return false;
-        }
+        return questions.add(question);
     }
 
     @Override
     public Boolean removeQuestion(Question question) {
-        if (questions.remove(question)) {
-            return true;
-        } else {
-            return false;
-        }
+        return questions.remove(question);
     }
 
     @Override
